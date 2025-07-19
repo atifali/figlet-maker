@@ -6,15 +6,18 @@ function App() {
   const [asciiArt, setAsciiArt] = useState("");
 
   useEffect(() => {
-    figlet.text(input || "ASCII", {
-      font: "Standard",
-    }, (err, data) => {
-      if (err) {
+    const generateAscii = async () => {
+      try {
+        const result = await figlet.promises.text(input || "ASCII", {
+          font: "Standard",
+        });
+        setAsciiArt(result);
+      } catch (err) {
         setAsciiArt("Something went wrong.");
-      } else {
-        setAsciiArt(data);
       }
-    });
+    };
+
+    generateAscii();
   }, [input]);
 
   return (
@@ -27,7 +30,7 @@ function App() {
         placeholder="Type something..."
         className="w-full max-w-md px-4 py-2 mb-4 bg-gray-800 border border-gray-700 rounded-md text-white"
       />
-      <pre className="whitespace-pre-wrap font-mono text-sm bg-gray-800 p-4 rounded-md overflow-auto max-w-full">
+      <pre className="whitespace-pre font-mono text-sm bg-gray-800 p-4 rounded-md overflow-auto max-w-full">
         {asciiArt}
       </pre>
     </div>
