@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import figlet from "figlet";
 
 function App() {
@@ -6,18 +6,16 @@ function App() {
   const [asciiArt, setAsciiArt] = useState("");
 
   useEffect(() => {
-    const generateAscii = async () => {
-      try {
-        const result = await figlet.promises.text(input || "ASCII", {
-          font: "Standard",
-        });
-        setAsciiArt(result);
-      } catch (err) {
-        setAsciiArt("Something went wrong.");
-      }
-    };
-
-    generateAscii();
+    try {
+      const result = figlet.textSync(input || "ASCII", {
+        font: "Standard",
+        horizontalLayout: "default",
+        verticalLayout: "default",
+      });
+      setAsciiArt(result);
+    } catch (err) {
+      setAsciiArt("Something went wrong.");
+    }
   }, [input]);
 
   return (
