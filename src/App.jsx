@@ -1,22 +1,8 @@
-import { useState, useEffect } from "react";
-import figlet from "figlet";
+import { useState } from "react";
+import Figlet from "./components/figlet";
 
 function App() {
   const [input, setInput] = useState("");
-  const [asciiArt, setAsciiArt] = useState("");
-
-  useEffect(() => {
-    try {
-      const result = figlet.textSync(input || "ASCII", {
-        font: "Standard",
-        horizontalLayout: "default",
-        verticalLayout: "default",
-      });
-      setAsciiArt(result);
-    } catch (err) {
-      setAsciiArt("Something went wrong.");
-    }
-  }, [input]);
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-6">
@@ -28,9 +14,7 @@ function App() {
         placeholder="Type something..."
         className="w-full max-w-md px-4 py-2 mb-4 bg-gray-800 border border-gray-700 rounded-md text-white"
       />
-      <pre className="whitespace-pre font-mono text-sm bg-gray-800 p-4 rounded-md overflow-auto max-w-full">
-        {asciiArt}
-      </pre>
+      <Figlet text={input}></Figlet>
     </div>
   );
 }
