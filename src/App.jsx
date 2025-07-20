@@ -14,7 +14,9 @@ function App() {
         placeholder="Type something..."
         className="w-full max-w-md px-4 py-2 mb-4 bg-gray-800 border border-gray-700 rounded-md text-white"
       />
-      <Figlet text={input}></Figlet>
+      <div className="">
+        <Figlet text={input}></Figlet>
+      </div>
     </div>
   );
 }
