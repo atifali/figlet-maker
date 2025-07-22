@@ -15,7 +15,11 @@ function Figlet({ text, font = 'Standard', ...props }) {
         })
     }, [text, font, stringify(props)]);
 
-    return <pre {...props}>{ascii}</pre>
+    return (
+        <div className="w-full overflow-x-auto">
+            <pre className="w-2xl">{ascii}</pre>
+        </div>
+    );
 }
 
 export default Figlet;
